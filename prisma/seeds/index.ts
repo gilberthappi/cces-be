@@ -10,6 +10,7 @@ async function main() {
         email: "admin@gmail.com",
         firstName: "Eng-",
         lastName: "Manager",
+        phoneNumber: "0781234567",
         password: hashSync("Password123!", 10),
       },
     });

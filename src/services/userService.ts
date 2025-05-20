@@ -91,6 +91,7 @@ export class UserService {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            phoneNumber: user.phoneNumber,
             password: hashedPassword,
             photo: typeof user.photo === "string" ? user.photo : undefined,
           },
@@ -153,6 +154,7 @@ export class UserService {
           data: {
             firstName: user.firstName,
             lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
             email: user.email,
             password: hashedPassword,
             photo: typeof user.photo === "string" ? user.photo : undefined,
