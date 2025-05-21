@@ -31,13 +31,6 @@ export class FeedbackController {
     return FeedbackService.getAllFeedbacks();
   }
 
-  @Get("/{id}")
-  public async getFeedbackById(
-    @Path() id: string,
-  ): Promise<IResponse<TFeedback | null>> {
-    return FeedbackService.getFeedback(id);
-  }
-
   @Security("jwt")
   @Middlewares(checkRole(roles.ORGANIZATION))
   @Get("/organization")
@@ -45,6 +38,15 @@ export class FeedbackController {
     @Request() req: ExpressRequest,
   ): Promise<IResponse<TFeedback[]>> {
     return FeedbackService.getFeedbacksForOrganization(req);
+  }
+
+  @Security("jwt")
+  @Middlewares(checkRole(roles.CITIZEN))
+  @Get("/citizen")
+  public async getFeedbacksForCitizen(
+    @Request() req: ExpressRequest,
+  ): Promise<IResponse<TFeedback[]>> {
+    return FeedbackService.getFeedbacksForCitizen(req);
   }
 
   @Post("/")
@@ -55,6 +57,13 @@ export class FeedbackController {
     @Request() req: ExpressRequest,
   ): Promise<IResponse<TFeedback>> {
     return FeedbackService.createFeedback(feedbackData, req);
+  }
+
+  @Get("/{id}")
+  public async getFeedbackById(
+    @Path() id: string,
+  ): Promise<IResponse<TFeedback | null>> {
+    return FeedbackService.getFeedback(id);
   }
 
   @Put("/{id}")

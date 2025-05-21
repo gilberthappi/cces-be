@@ -164,6 +164,26 @@ export class FeedbackService extends BaseService {
     };
   }
 
+  public static async getFeedbacksForCitizen(
+    req: Request,
+  ): Promise<IResponse<TFeedback[]>> {
+    const feedbacks = await prisma.feedback.findMany({
+      where: {
+        userId: req.user!.id,
+      },
+    });
+
+    if (!feedbacks) {
+      throw new Error("feedbacks not found for the user");
+    }
+
+    return {
+      statusCode: 200,
+      message: "Feedbacks retrieved successfully",
+      data: feedbacks,
+    };
+  }
+
   public static async cancelFeedback(
     id: string,
   ): Promise<IResponse<TFeedback>> {
