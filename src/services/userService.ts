@@ -323,6 +323,7 @@ export class UserService {
         where: { id },
         include: {
           roles: true,
+          organization: true,
         },
       });
 

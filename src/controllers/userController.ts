@@ -98,11 +98,4 @@ export class UserController {
   public getMe(@Request() req: ExpressRequest) {
     return UserService.getMe(req);
   }
-
-  @Get("/drivers")
-  @Security("jwt")
-  @Middlewares(loggerMiddleware)
-  public getDrivers() {
-    return UserService.getDrivers();
-  }
 }
