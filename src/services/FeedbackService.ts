@@ -10,13 +10,12 @@ import { determineBestOrganizations, extractTags } from "../utils/helpers";
 import type { Request } from "express";
 
 function generateTicket(): string {
-  const letters = Array.from({ length: 5 }, () =>
-    String.fromCharCode(65 + Math.floor(Math.random() * 26)),
+  const ticket = Array.from({ length: 12 }, (_, i) =>
+    i % 2 === 0
+      ? String.fromCharCode(65 + Math.floor(Math.random() * 26)) // Letter
+      : Math.floor(Math.random() * 10),
   ).join("");
-  const numbers = Array.from({ length: 5 }, () =>
-    Math.floor(Math.random() * 10),
-  ).join("");
-  return `${letters}${numbers}`;
+  return ticket;
 }
 
 export class FeedbackService extends BaseService {
