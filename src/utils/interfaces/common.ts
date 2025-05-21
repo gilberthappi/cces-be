@@ -93,7 +93,7 @@ export type TFeedback = {
 export interface CreateFeedbackDto {
   phoneNumber?: string | null;
   category: string;
-  userId: string;
+  userId?: string;
   description: string;
   location: string;
   organizationIds?: string[];
