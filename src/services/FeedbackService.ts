@@ -9,6 +9,16 @@ import AppError from "../utils/error";
 import { determineBestOrganizations, extractTags } from "../utils/helpers";
 import type { Request } from "express";
 
+function generateTicket(): string {
+  const letters = Array.from({ length: 5 }, () =>
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)),
+  ).join("");
+  const numbers = Array.from({ length: 5 }, () =>
+    Math.floor(Math.random() * 10),
+  ).join("");
+  return `${letters}${numbers}`;
+}
+
 export class FeedbackService extends BaseService {
   public static async createFeedback(
     feedbackData: CreateFeedbackDto,
@@ -25,6 +35,8 @@ export class FeedbackService extends BaseService {
         3,
       );
 
+      const ticket = generateTicket();
+
       const feedback = await prisma.feedback.create({
         data: {
           userId: req.user!.id,
@@ -34,6 +46,7 @@ export class FeedbackService extends BaseService {
           galleryImages: feedbackData.galleryImages || [],
           phoneNumber: feedbackData.phoneNumber,
           organizationIds: bestMatches.map((m) => m.organization.id),
+          ticket,
         },
       });
 
@@ -155,6 +168,13 @@ export class FeedbackService extends BaseService {
           has: org.id,
         },
       },
+      include: {
+        response: {
+          include: {
+            organization: true,
+          },
+        },
+      },
     });
 
     return {
@@ -170,6 +190,13 @@ export class FeedbackService extends BaseService {
     const feedbacks = await prisma.feedback.findMany({
       where: {
         userId: req.user!.id,
+      },
+      include: {
+        response: {
+          include: {
+            organization: true,
+          },
+        },
       },
     });
 

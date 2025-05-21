@@ -70,6 +70,7 @@ model Feedback {
   description        String
   location           String
   phoneNumber        String?
+  ticket             String?
   galleryImages      String[]        @default([])    
   organizationIds    String[]        @default([]) 
   feedbackStatus     FeedbackStatus  @default(UNRESOLVED)

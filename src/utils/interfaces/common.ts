@@ -83,6 +83,7 @@ export type TFeedback = {
   userId: string;
   description: string;
   location: string;
+  ticket?: string | null;
   galleryImages?: (Express.Multer.File | string)[];
   phoneNumber?: string | null;
   organizationIds?: string[] | null;
@@ -92,6 +93,7 @@ export type TFeedback = {
 
 export interface CreateFeedbackDto {
   phoneNumber?: string | null;
+  ticket?: string | null;
   category: string;
   userId?: string;
   description: string;
