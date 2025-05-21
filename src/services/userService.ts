@@ -308,6 +308,8 @@ export class UserService {
           lastName: user.lastName,
           email: user.email,
           roles: userRoles,
+          photo: user.photo,
+          phoneNumber: user.phoneNumber,
         },
       };
     } catch (error) {
