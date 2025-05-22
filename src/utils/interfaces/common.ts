@@ -108,7 +108,7 @@ export type TResponse = {
   feedbackId: string;
   description: string;
   organizationId?: string | null;
-  galleryImages?: (Express.Multer.File | string)[];
+  photo?: Express.Multer.File | string | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -118,5 +118,5 @@ export interface CreateResponseDto {
   feedbackId: string;
   description: string;
   organizationId?: string;
-  galleryImages?: string[];
+  photo?: Express.Multer.File | string | null;
 }

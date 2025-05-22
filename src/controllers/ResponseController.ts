@@ -22,6 +22,7 @@ import { appendPhotoAttachments } from "../middlewares/company.middlewares";
 import { Request as ExpressRequest } from "express";
 import { roles } from "../utils/roles";
 import { checkRole } from "../middlewares";
+import { appendPhoto } from "../middlewares/company.middlewares";
 
 @Tags("Response")
 @Route("/api/response")
@@ -43,6 +44,7 @@ export class ResponseController {
   @Middlewares(
     upload.any(),
     appendPhotoAttachments,
+    appendPhoto,
     checkRole(roles.ORGANIZATION),
   )
   public async createResponse(
@@ -56,6 +58,7 @@ export class ResponseController {
   @Middlewares(
     upload.any(),
     appendPhotoAttachments,
+    appendPhoto,
     checkRole(roles.ORGANIZATION),
   )
   public async updateResponse(

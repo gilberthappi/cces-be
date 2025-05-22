@@ -58,7 +58,10 @@ export class ResponseService {
         feedbackId: responseData.feedbackId,
         organizationId: org.id,
         description: responseData.description,
-        galleryImages: responseData.galleryImages || [],
+        photo:
+          typeof responseData.photo === "string"
+            ? responseData.photo
+            : undefined,
       },
     });
 
