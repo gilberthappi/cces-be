@@ -54,13 +54,6 @@ export class ResponseController {
     return ResponseService.createResponse(responseData, req);
   }
 
-  @Put("/{id}")
-  @Middlewares(
-    upload.any(),
-    appendPhotoAttachments,
-    appendPhoto,
-    checkRole(roles.ORGANIZATION),
-  )
   @Delete("/{id}")
   public async deleteResponse(@Path() id: string): Promise<IResponse<null>> {
     await ResponseService.deleteResponse(id);
